@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	while (*format)
+	while (*format && format)
 	{
 		if (*format == '%' && *(format + 1) != 0)
 		{
