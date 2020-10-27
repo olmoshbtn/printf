@@ -34,4 +34,6 @@ int print_s(va_list args);
 /* print integers */
 int print_i(va_list args);
 
+/* auxiliary function */
+int aux_func(const char *format, va_list args, print_fx *fx);
 #endif

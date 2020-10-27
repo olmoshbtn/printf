@@ -1,4 +1,5 @@
 #include "holberton.h"
+
 /**
  * _printf - produces output according to a format
  * @format: format string containing the characters and the specifiers
@@ -6,41 +7,59 @@
  */
 int _printf(const char *format, ...)
 {
-	int  i, flag;
 	int contador = 0;
 	va_list args;
+
 	print_fx fx[] = {
-		{"c", print_c}, {"s", print_s}, {"i", print_i},
-		{"d", print_i}, {NULL, NULL}
+		{"c", print_c},
+		{"s", print_s},
+		{"i", print_i},
+		{"d", print_i},
+		{NULL, NULL}
 	};
 	va_start(args, format);
 	if (!format || (format[0] == '%' && !format[1]))
 	{
 		return (-1);
 	}
+	contador = aux_func(format, args, fx);
+	va_end(args);
+	return (contador);
+}
+
+/**
+ * aux_func - auxiliary function
+ * @format: format
+ * @args: args
+ * @fx: fx
+ * Return: Always 0
+ */
+int aux_func(const char *format, va_list args, print_fx *fx)
+{
+	int contador = 0, flag = 0, i = 0;
+
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			i = 0;
 			while (fx[i].s)
 			{
-			if (*(format + 1) == '%')
-			{
-				_putchar(*format);
-				contador++;
-				format = format + 2;
-				flag = 1;
-				break;
-			}
-			else if (*(format + 1) == *fx[i].s)
-			{
-				contador += fx[i].f(args);
-				format = format + 2;
-				flag = 1;
-				break;
-			}
-			i++;
+				if (*(format + 1) == '%')
+				{
+					_putchar(*format);
+					contador++;
+					format = format + 2;
+					flag = 1;
+					break;
+				}
+				else if (*(format + 1) == *fx[i].s)
+				{
+					contador += fx[i].f(args);
+					format = format + 2;
+					flag = 1;
+					break;
+				}
+				i++;
 			}
 			if (flag == 0)
 			{
@@ -52,11 +71,9 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-		_putchar(*format);
-		contador++;
-		format++;
+			_putchar(*format);
+			contador++, format++;
 		}
 	}
-	va_end(args);
 	return (contador);
 }
