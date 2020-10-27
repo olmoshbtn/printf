@@ -2,8 +2,6 @@
 /**
  * _printf - produces output according to a format
  * @format: format string containing the characters and the specifiers
- * Description: this function determine which printing function to call
- * depending on the conversion specifiers contained
  * Return: length of the formatted output string
  */
 int _printf(const char *format, ...)
@@ -11,17 +9,11 @@ int _printf(const char *format, ...)
 	int  i;
 	int contador = 0;
 	va_list args;
-
 	print_fx fx[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"i", print_i},
-		{"d", print_i},
-		{NULL, NULL}
+		{"c", print_c}, {"s", print_s}, {"i", print_i},
+		{"d", print_i}, {NULL, NULL}
 	};
-
 	va_start(args, format);
-
 	if (!*format || (format[0] == '%' && !format[1]))
 	{
 		return (-1);
@@ -49,12 +41,8 @@ int _printf(const char *format, ...)
 			}
 			format++;
 		}
-		else
-		{
 			_putchar(*format);
-			contador++;
-			format++;
-		}
+			contador++, format++;
 	}
 	va_end(args);
 	return (contador);

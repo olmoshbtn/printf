@@ -1,0 +1,27 @@
+.TH man_3_printf 1 "27 October 2020" "version 1.0" "printf man page"
+.SH NAME
+.B printf
+\-format and print data.
+.SH SYNOPSIS
+.B printf FORMAT [ARGUMENT]...
+ #include "holberton.h"
+.SH DESCRIPTION
+Print ARGUMENT(s) according to FORMAT or execute according to OPTION.
+Upon successful, returns the number of characters printed
+(excluding the null byte used to end output to strings);
+If an output error is encountered, -1 is returned.
+.B  Conversion specifiers
+(A character that specifies the type of conversion to be applied):
+c - single characters
+s - string
+% - percentage
+d - decimal
+i - integer
+.SH SEE ALSO
+printf(3)
+The _printf function emulates functionality of the C standard library
+function printf().
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Sebastian Olmos and Luciana Sarachu.
