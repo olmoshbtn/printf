@@ -37,11 +37,6 @@ int _printf(const char *format, ...)
 					{
 						contador += fx[i].f(args);
 					}
-					else
-					{
-						_putchar(*format);
-						contador++;
-					}
 					i++;
 				}
 			}
