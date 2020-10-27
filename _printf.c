@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
 			{
 				while (fx[i].s)
 				{
-					if (*format == *fx[i].s[0])
+					if (*format == *fx[i].s)
 					{
 						contador += fx[i].f(args);
 					}
