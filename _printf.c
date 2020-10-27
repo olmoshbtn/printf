@@ -6,7 +6,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int  i;
+	int  i, flag;
 	int contador = 0;
 	va_list args;
 	print_fx fx[] = {
@@ -20,35 +20,41 @@ int _printf(const char *format, ...)
 	}
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != 0)
+		if (*format == '%')
 		{
-			format++;
 			i = 0;
-			if (*format == '%')
+			while (fx[i].s)
+			{
+			if (*(format + 1) == '%')
 			{
 				_putchar(*format);
 				contador++;
+				format = format + 2;
+				flag = 1;
+				break;
 			}
-			else
+			else if (*(format + 1) == *fx[i].s)
 			{
-				while (fx[i].s)
-				{
-					if (*format == *fx[i].s)
-					{
-						contador += fx[i].f(args);
-						break;
-					}
-					i++;
-				}
-
+				contador += fx[i].f(args);
+				format = format + 2;
+				flag = 1;
+				break;
 			}
-			format++;
+			i++;
+			}
+			if (flag == 0)
+			{
+				_putchar(*format);
+				_putchar(*(format + 1));
+				contador = contador + 2;
+				format = format + 2;
+			}
 		}
 		else
 		{
-			_putchar(*format);
-			contador++;
-			format++;
+		_putchar(*format);
+		contador++;
+		format++;
 		}
 	}
 	va_end(args);
