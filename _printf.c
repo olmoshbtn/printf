@@ -27,6 +27,7 @@ int _printf(const char *format, ...)
 			if (*format == '%')
 			{
 				_putchar(*format);
+				contador++;
 			}
 			else
 			{
@@ -41,8 +42,11 @@ int _printf(const char *format, ...)
 			}
 			format++;
 		}
+		else
+		{
 			_putchar(*format);
 			contador++, format++;
+		}
 	}
 	va_end(args);
 	return (contador);
