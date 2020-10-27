@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	while (*format && format)
+	while (*format)
 	{
 		if (*format == '%' && *(format + 1) != 0)
 		{
@@ -36,16 +36,19 @@ int _printf(const char *format, ...)
 					if (*format == *fx[i].s)
 					{
 						contador += fx[i].f(args);
+						break;
 					}
 					i++;
 				}
+
 			}
 			format++;
 		}
 		else
 		{
 			_putchar(*format);
-			contador++, format++;
+			contador++;
+			format++;
 		}
 	}
 	va_end(args);
