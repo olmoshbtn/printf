@@ -1,2 +1,2 @@
-# printf
-Group project create printf function
+C - printf
+Group Project

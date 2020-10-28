@@ -4,7 +4,7 @@
 \-format and print data.
 .SH SYNOPSIS
 .B printf FORMAT [ARGUMENT]...
- #include "holberton.h"
+#include "holberton.h"
 .SH DESCRIPTION
 Print ARGUMENT(s) according to FORMAT or execute according to OPTION.
 Upon successful, returns the number of characters printed
@@ -13,15 +13,15 @@ If an output error is encountered, -1 is returned.
 .B  Conversion specifiers
 (A character that specifies the type of conversion to be applied):
 
-c - single characters
+ c - single characters
 
-s - string
+ s - string
 
-% - percentage
+ % - percentage
 
-d - decimal
+ d - decimal
 
-i - integer
+ i - integer
 
 .SH SEE ALSO
 printf(3)
