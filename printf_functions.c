@@ -1,33 +1,43 @@
 #include "holberton.h"
 
 /**
- * print_c - prints a character
- * @args: arguments for _printf
- * Return: number of char printed
+ * print_c - prints a single char
+ * @args: arguments received from _printf
+ * Return: numbers of chars
  */
 int print_c(va_list args)
 {
 	char c = va_arg(args, int);
 
-	_putchar(c);
+	write(1, &c, 1);
 	return (1);
 }
+
+
 /**
- * print_s - loops through a string and prints every character
- * @args: arguments for _printf
- * Return: number of char printed
+ * print_s - prints a string
+ * @args: arguments received from _printf
+ * Return: number of chars
  */
 int print_s(va_list args)
 {
 	int i;
-	char *c = va_arg(args, char *);
+	char *str;
 
-	for (i = 0; c[i] != '\0'; i++)
+	str = va_arg(args, char *);
+	if (str == NULL)
 	{
-		_putchar(c[i]);
+		str = "(null)";
+	}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		write(1, &str[i], 1);
 	}
 	return (i);
 }
+
+
+
 /**
  * print_i - print integers
  * @args: arguments for _printf
@@ -35,50 +45,44 @@ int print_s(va_list args)
  */
 int print_i(va_list args)
 {
-	int cifras, i, j, digitos, potencia;
-	int n = va_arg(args, int);
-	unsigned int m, un;
+	int i, j, cifras = 0, potencia, n, y = 0, bytes = 0;
+	unsigned int a, b;
 
+	n = va_arg(args, int);
+	if (n == 0)
+	{
+		_putchar('0');
+		bytes++;
+		return (bytes);
+	}
 	if (n < 0)
 	{
-		un = (-1) * n;
 		_putchar('-');
+		a = n * -1;
+		bytes++;
 	}
 	else
 	{
-		un = n;
+		a = n;
 	}
-	m = un;
-	cifras = 0;
-	while (m / 10 != 0)
+	b = a;
+	while ((a / 10) != 0)
 	{
 		cifras++;
-		m = m / 10;
+		a /= 10;
 	}
+
 	for (i = 0; i < cifras; i++)
 	{
 		potencia = 1;
-
 		for (j = i; j < cifras; j++)
 		{
 			potencia = potencia * 10;
 		}
-
-		digitos = un / potencia;
-		un = un - (digitos * potencia);
-		_putchar(digitos + 48);
+		y = b / potencia;
+		b = b - (y * potencia);
+		_putchar(y + '0');
 	}
-	_putchar(un + 48);
-	return (cifras + 1);
-}
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
+	_putchar(b + '0');
+	return (bytes + cifras + 1);
 }
